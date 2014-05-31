@@ -21,9 +21,23 @@ function showSavings(savings) {
   $("#savingsTable").html("");
 
   // add to div
-  $.each(savings,function(){
+  $.each(savings,function(i){
     var item = $("<div></div>")
-              .html(this.toFixed(2));
+                .html(this.toFixed(2))
+                .css({
+                  top:"-5px",
+                  opacity:0
+                });
     $("#savingsTable").append(item);
+    if (this >200) {
+      item.css({
+        color:"green"
+      });
+    }
+
+    item.delay(i*20).animate({
+      top:"5px",
+      opacity:1
+    });
   });
 }
