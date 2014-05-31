@@ -12,8 +12,8 @@ $(document).ready(function(){
 
 function calculateSavings() {
   var savings = [];
-  annual = 10;
-  interest = 0.05;
+  annual = $("#annual_savings").val();
+  interest = $("#interest_rate").val()/100;
   savings.push(0);
   for (var i=1;i<10;i++) {
     savings.push((savings[i-1] + annual) * (1+interest));
@@ -23,6 +23,7 @@ function calculateSavings() {
 }
 
 function showSavings(savings) {
+  $("#savingsTable").html("");
   $.each(savings,function(){
     var item = $("<div></div>")
               .html(this);
