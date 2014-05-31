@@ -1,10 +1,4 @@
 $(document).ready(function(){
-  $.each([6,2,12],function(i){
-    var item = $("<div></div>")
-              .html("hello" + this);
-    $("#savingsTable").append(item);
-  });
-
   $("button#calculate").click(function(){
     calculateSavings();
   });
@@ -12,10 +6,10 @@ $(document).ready(function(){
 
 function calculateSavings() {
   var savings = [];
-  annual = $("#annual_savings").val();
-  interest = $("#interest_rate").val()/100;
+  annual = parseFloat($("#annual_savings").val());
+  interest = parseFloat($("#interest_rate").val()) / 100;
   savings.push(0);
-  for (var i=1;i<10;i++) {
+  for (var i=1;i<20;i++) {
     savings.push((savings[i-1] + annual) * (1+interest));
   }
 
@@ -23,10 +17,13 @@ function calculateSavings() {
 }
 
 function showSavings(savings) {
+  // clear div
   $("#savingsTable").html("");
+
+  // add to div
   $.each(savings,function(){
     var item = $("<div></div>")
-              .html(this);
+              .html(this.toFixed(2));
     $("#savingsTable").append(item);
   });
 }
