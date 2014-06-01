@@ -1,18 +1,47 @@
-var a;
+var rates;
 
-$.getJSON("json/latest.json", function(obj){
-  a = obj;
-  console.log(obj);
-  $.each(obj.rates,function(currency,rate){
-    console.log (currency + " " + rate);
-  });
-});
+var currentCurrency = "USD";
+function changeCurrency(currency) {
+  var currRate = rates[currentCurrency];
+  var newRate = rates[currency];
+  var conversion = newRate/currRate;
+
+  var annual = parseFloat($("#annual_savings").val());
+  $("#annual_savings").val(annual * conversion)
+
+  // update current
+  currentCurrency = currency;
+
+  // reload view
+  calculateSavings();
+}
 
 $(document).ready(function(){
   $("button#calculate").click(function(){
     calculateSavings();
   });
+
+  $("select#currencies").change(function() {
+    changeCurrency($("select#currencies option:selected").val());
+  });
+
+  loadCurrencies();
+
 });
+
+function loadCurrencies(){
+  $.getJSON("json/latest.json", function(obj){
+    rates = obj.rates;
+    $.each(obj.rates,function(currency,rate){
+      console.log (currency + " " + rate);
+      $("<option></option>")
+        .html(currency)
+        .val(currency)
+        .appendTo("select#currencies");
+    });
+    $("select#currencies").val(currentCurrency);
+  });
+}
 
 function calculateSavings() {
   var savings = [];
