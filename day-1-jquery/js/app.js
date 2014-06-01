@@ -1,3 +1,13 @@
+var a;
+
+$.getJSON("json/latest.json", function(obj){
+  a = obj;
+  console.log(obj);
+  $.each(obj.rates,function(currency,rate){
+    console.log (currency + " " + rate);
+  });
+});
+
 $(document).ready(function(){
   $("button#calculate").click(function(){
     calculateSavings();
@@ -29,6 +39,7 @@ function showSavings(savings) {
                   opacity:0
                 });
     $("#savingsTable").append(item);
+
     if (this >200) {
       item.css({
         color:"green"
