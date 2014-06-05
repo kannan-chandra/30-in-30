@@ -14,11 +14,18 @@ a {
 }
 
 #set-1 {
-  background: #0e83cd;
+  background: #2980b9;
 }
+
+#set-2 {
+  background: #8e44ad;
+}
+
+
 
 .hover-link {
   position: relative;
+  padding: 5px;
 }
 
 .hover-link:after {
@@ -43,4 +50,45 @@ a {
   border-bottom: 2px solid white;
   width:100%;
   left:0;
+}
+
+.dash-link:after {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  width: 0;
+  left: 50%;
+}
+
+.dash-link:hover:after {
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  width: 100%;
+  left: 0;
+}
+
+.spin-link {
+  -webkit-transform:rotate(10deg);
+  display: block;
+  border: 1px white solid;
+  width: 100px;
+}
+
+.spin-link:hover {
+  animation: spin 1s linear infinite;
+  color:black;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.test {
+
 }
